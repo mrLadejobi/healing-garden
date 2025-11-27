@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Healing Garden</title>
+    
+    <!-- Link to CSS File -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NEW: Global Background Falling Petals Container -->
+    <div class="global-petals-container" id="global-petals"></div>
+
+    <!-- AUDIO PLAYER (Hidden, Auto-play enabled) -->
+    <audio id="garden-ambience" loop autoplay>
+        <source src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Bird_Singing_in_Forest.ogg" type="audio/ogg">
+        Your browser does not support audio.
+    </audio>
+    
+    <!-- SOUND TOGGLE BUTTON -->
+    <div class="sound-toggle playing" onclick="toggleSound()" title="Toggle Garden Ambience">
+        <!-- Icon: Mute -->
+        <svg id="icon-muted" class="sound-icon" viewBox="0 0 24 24" style="display: none;">
+            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <!-- Icon: Playing -->
+        <svg id="icon-playing" class="sound-icon" viewBox="0 0 24 24">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#" onclick="showPage('home')" class="logo brand-font">The Healing Garden</a>
+        <div class="mobile-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="showPage('home')" id="link-home" class="active">Home</a></li>
+            <li><a href="#" onclick="showPage('about')" id="link-about">About</a></li>
+            <li><a href="#" onclick="showPage('services')" id="link-services">Services</a></li>
+            <li><a href="#" onclick="showPage('testimonials')" id="link-testimonials">Testimonials</a></li>
+            <li><a href="#" onclick="showPage('contact')" id="link-contact">Contact</a></li>
+            <li><a href="#" onclick="showPage('book')" class="btn-nav">Book a Session</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- HOME PAGE -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <!-- Background Blobs -->
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+                
+                <!-- Living Petal Bouquet Frame -->
+                <div class="petal-stream-container">
+                    <!-- Top Left Bouquet -->
+                    <svg class="bouquet-corner bouquet-top-left" viewBox="0 0 200 200">
+                         <path d="M50 50 Q70 20 100 50 T150 50 T200 50" stroke="none" fill="currentColor" opacity="0.5"/>
+                         <path d="M30 70 Q60 40 90 70 T150 90" stroke="none" fill="currentColor" opacity="0.3"/>
+                         <circle cx="40" cy="40" r="10" fill="currentColor" opacity="0.6"/>
+                         <circle cx="60" cy="20" r="8" fill="currentColor" opacity="0.4"/>
+                         <circle cx="20" cy="60" r="12" fill="currentColor" opacity="0.5"/>
+                         <path d="M100 100 C100 50 150 50 150 100 C150 150 100 150 100 100" transform="rotate(45 100 100) translate(-50 -50)" fill="currentColor" opacity="0.2"/>
+                         <path d="M120 120 C120 70 170 70 170 120 C170 170 120 170 120 120" transform="rotate(20 120 120) translate(-40 -60)" fill="currentColor" opacity="0.3"/>
+                    </svg>
+
+                    <!-- Bottom Right Bouquet -->
+                    <svg class="bouquet-corner bouquet-bottom-right" viewBox="0 0 200 200">
+                         <path d="M50 50 Q70 20 100 50 T150 50 T200 50" stroke="none" fill="currentColor" opacity="0.5"/>
+                         <path d="M30 70 Q60 40 90 70 T150 90" stroke="none" fill="currentColor" opacity="0.3"/>
+                         <circle cx="160" cy="160" r="15" fill="currentColor" opacity="0.6"/>
+                         <circle cx="140" cy="180" r="8" fill="currentColor" opacity="0.4"/>
+                         <path d="M100 100 C100 50 150 50 150 100 C150 150 100 150 100 100" transform="rotate(225 100 100) translate(-50 -50)" fill="currentColor" opacity="0.2"/>
+                    </svg>
+
+                    <!-- Floating Stream Petals -->
+                    <div class="floating-petal" style="left: 10%; top: 20%; width: 20px; height: 20px; background: var(--primary); border-radius: 50% 0; animation-duration: 12s;"></div>
+                    <div class="floating-petal" style="left: 20%; top: 80%; width: 15px; height: 15px; background: #a32d96; border-radius: 0 50%; animation-duration: 18s; animation-delay: 2s;"></div>
+                    <div class="floating-petal" style="right: 15%; top: 40%; width: 25px; height: 25px; background: var(--primary); border-radius: 50% 0; animation-duration: 20s; animation-delay: 5s;"></div>
+                    <div class="floating-petal" style="right: 5%; bottom: 20%; width: 18px; height: 18px; background: #dac0e3; border-radius: 0 50%; animation-duration: 15s; animation-delay: 1s;"></div>
+                </div>
+
+                <div class="container hero-content">
+                    <h1 class="brand-font">Bloom Where You Are Planted</h1>
+                    <h2 class="hero-tagline brand-font">Nurture. Care. Bloom.</h2>
+                    <p>A safe space for emotional healing, psychological growth, and personal transformation.</p>
+                    <div>
+                        <a href="#" onclick="showPage('book')" class="btn">Book a Session</a>
+                        <a href="#" onclick="showPage('services')" class="btn btn-outline">Explore Services</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section id="about" class="page-section">
+            <div class="container section-padding">
+                <div class="about-intro">
+                    <div class="floral-header">
+                        <svg class="floral-icon" viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                        <h2 style="font-size: 2.5rem; margin: 0;">About The Garden</h2>
+                        <svg class="floral-icon" viewBox="0 0 24 24" style="transform: scaleX(-1);"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                    </div>
+                    <p style="color: var(--text-light); font-size: 1.1rem;">We are dedicated to helping you find your path back to yourself through compassionate care and expert guidance.</p>
+                </div>
+
+                <!-- 1. WHO WE ARE -->
+                <div class="about-subsection">
+                    <div class="who-we-are-split">
+                        <div class="who-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#86147B" stroke-width="1" width="100" height="100" style="z-index: 1;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div class="who-text">
+                            <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">Who We Are</h3>
+                            <h2 style="margin-bottom: 1.5rem;">A Sanctuary for the Soul</h2>
+                            <p style="margin-bottom: 1rem; color: var(--text-light);">The Healing Garden is more than just a counseling practice; it is a safe haven designed for restoration. Founded on the belief that mental health is the foundation of a fulfilling life, we have gathered a team of empathetic professionals dedicated to your well-being.</p>
+                            <p style="color: var(--text-light);">We are listeners, guides, and partners in your journey. We believe in the resilience of the human spirit and the power of feeling truly heard.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. WHAT WE DO -->
+                <div class="about-subsection">
+                    <div class="text-center mb-8">
+                        <div class="floral-header" style="margin-bottom: 1rem;">
+                             <svg class="floral-icon" viewBox="0 0 24 24" style="width: 25px; height: 25px;"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                             <h3 style="margin: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">What We Do</h3>
+                             <svg class="floral-icon" viewBox="0 0 24 24" style="width: 25px; height: 25px; transform: scaleX(-1);"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                        </div>
+                        <h2 style="margin-bottom: 1rem;">Bridging Science & Soul</h2>
+                    </div>
+                    <div class="what-we-do-grid">
+                        <div class="what-card">
+                            <h3 style="margin-bottom: 1rem;">Clinical Excellence</h3>
+                            <p style="color: var(--text-light);">We provide evidence-based psychological counseling grounded in proven therapeutic methods like CBT, DBT, and Talk Therapy.</p>
+                        </div>
+                        <div class="what-card">
+                            <h3 style="margin-bottom: 1rem;">Holistic Coaching</h3>
+                            <p style="color: var(--text-light);">Beyond treating symptoms, we offer coaching that focuses on future goals, unlocking potential, and finding life purpose.</p>
+                        </div>
+                        <div class="what-card">
+                            <h3 style="margin-bottom: 1rem;">Community Support</h3>
+                            <p style="color: var(--text-light);">Through workshops and group sessions, we build connections, reminding you that you do not have to walk this path alone.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. HOW WE CAN HELP -->
+                <div class="about-subsection">
+                    <div class="how-help-container">
+                        <div class="help-content">
+                            <div class="floral-header" style="justify-content: flex-start; margin-bottom: 1rem;">
+                                 <svg class="floral-icon" viewBox="0 0 24 24" style="width: 25px; height: 25px;"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                                 <h3 style="margin: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">How We Can Help</h3>
+                            </div>
+                            <h2 style="margin-bottom: 1.5rem;">From Struggle to Strength</h2>
+                            <p style="color: var(--text-light); margin-bottom: 2rem;">Life can feel overwhelming, but you don't have to navigate it without a map. We provide the tools, perspective, and support you need to transform your challenges into growth.</p>
+                            <a href="#" onclick="showPage('book')" class="btn">Start Your Journey</a>
+                        </div>
+                        <ul class="help-list">
+                            <li>
+                                <div class="help-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <span>Overcoming anxiety and stress</span>
+                            </li>
+                            <li>
+                                <div class="help-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <span>Navigating relationship conflicts</span>
+                            </li>
+                            <li>
+                                <div class="help-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <span>Healing from past trauma</span>
+                            </li>
+                            <li>
+                                <div class="help-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <span>Finding career direction and purpose</span>
+                            </li>
+                            <li>
+                                <div class="help-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <span>Building self-esteem and confidence</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SERVICES PAGE -->
+        <section id="services" class="page-section">
+            <div class="container section-padding">
+                <div class="text-center">
+                    <div class="floral-header">
+                         <svg class="floral-icon" viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                        <h2 style="font-size: 2.5rem; margin: 0;">Our Services</h2>
+                        <svg class="floral-icon" viewBox="0 0 24 24" style="transform: scaleX(-1);"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                    </div>
+                    <p class="mb-8" style="color: var(--text-light);">Holistic care tailored to your specific needs.</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </div>
+                        <h3>Individual Therapy</h3>
+                        <p>One-on-one sessions tailored to help you navigate anxiety, depression, trauma, or personal life challenges in a confidential setting.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3>Couples Counseling</h3>
+                        <p>Strengthen your bond, improve communication, and resolve conflicts with a neutral, supportive mediator to guide the way.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        </div>
+                        <h3>Life Coaching</h3>
+                        <p>Action-oriented sessions focused on achieving specific goals, career transitions, and unlocking your highest potential.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                        </div>
+                        <h3>Group Workshops</h3>
+                        <p>Interactive sessions on stress management, mindfulness, and emotional intelligence in a supportive community environment.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        </div>
+                        <h3>Crisis Intervention</h3>
+                        <p>Immediate support and coping strategies for acute emotional distress and sudden life changes.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 13 2 13a7 7 0 0 1-10 5z"></path><path d="M8 2c2.6 7 2.6 13 0 20"></path></svg>
+                        </div>
+                        <h3>Wellness Retreats</h3>
+                        <p>Immersive weekend experiences designed to reset your nervous system and reconnect you with nature and yourself.</p>
+                    </div>
+                </div>
+
+                <div class="text-center" style="margin-top: 4rem;">
+                    <a href="#" onclick="showPage('contact')" class="btn">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS PAGE -->
+        <section id="testimonials" class="page-section">
+            <div class="container section-padding">
+                <div class="text-center">
+                    <div class="floral-header">
+                         <svg class="floral-icon" viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                        <h2 style="font-size: 2.5rem; margin: 0;">Stories of Growth</h2>
+                        <svg class="floral-icon" viewBox="0 0 24 24" style="transform: scaleX(-1);"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                    </div>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p style="font-style: italic; color: #555;">"The Healing Garden has truly been a sanctuary for me. I've found a level of peace I didn't think was possible."</p>
+                        <h4 style="margin-top: 1.5rem; font-size: 1.1rem;">- Sarah J.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p style="font-style: italic; color: #555;">"Professional, insightful, and deeply caring. My sessions here have changed how I approach my relationships."</p>
+                        <h4 style="margin-top: 1.5rem; font-size: 1.1rem;">- Michael T.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p style="font-style: italic; color: #555;">"I was hesitant about therapy, but the warm atmosphere made me feel safe immediately. Highly recommended."</p>
+                        <h4 style="margin-top: 1.5rem; font-size: 1.1rem;">- Amara O.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p style="font-style: italic; color: #555;">"The coaching helped me clarify my career goals and take the leap I've been scared to take for years."</p>
+                        <h4 style="margin-top: 1.5rem; font-size: 1.1rem;">- David L.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING PAGE -->
+        <section id="book" class="page-section">
+            <div class="container section-padding">
+                <div class="contact-wrapper">
+                    <div class="contact-sidebar">
+                        <div>
+                            <div class="floral-header" style="justify-content: flex-start; margin-bottom: 1rem;">
+                                 <svg class="floral-icon" viewBox="0 0 24 24" style="width: 25px; height: 25px; fill: white; opacity: 0.8;"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                                <h2 style="color: white; margin: 0;">Let's Begin</h2>
+                            </div>
+                            <p style="opacity: 0.9; margin-bottom: 2rem;">Take the first step towards your healing journey today.</p>
+                        </div>
+                        <div>
+                            <p style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                +1 (555) 123-4567
+                            </p>
+                            <p style="display: flex; align-items: center; gap: 10px;">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                hello@healinggarden.com
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-main">
+                        <h2 class="mb-4">Book Your Session</h2>
+                        <form onsubmit="event.preventDefault(); alert('Request sent! We will contact you shortly.');">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control" placeholder="Jane Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Service Type</label>
+                                <select class="form-control">
+                                    <option>Individual Therapy</option>
+                                    <option>Couples Counseling</option>
+                                    <option>Life Coaching</option>
+                                    <option>Free Consultation</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Preferred Date</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Notes</label>
+                                <textarea class="form-control" rows="4" placeholder="Briefly describe what you'd like to discuss..."></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="width: 100%;">Request Appointment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="contact" class="page-section">
+            <div class="container section-padding">
+                <div class="text-center">
+                    <div class="floral-header">
+                         <svg class="floral-icon" viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                        <h2 style="font-size: 2.5rem; margin: 0;">Get In Touch</h2>
+                        <svg class="floral-icon" viewBox="0 0 24 24" style="transform: scaleX(-1);"><path d="M12 2C7 2 5 6 5 8c0 4 5 10 7 12 2-2 7-8 7-12 0-2-2-6-7-6zm0 14c-1.5-2-4-6-4-8 0-1 1-3 4-3s4 2 4 3c0 2-2.5 6-4 8z"/></svg>
+                    </div>
+                </div>
+                <div class="contact-wrapper">
+                    <div class="contact-main" style="flex: 1;">
+                        <h3 class="mb-4">Visit Us</h3>
+                        <p class="mb-8" style="color: var(--text-light);">We are here to answer any questions you may have about our services or the therapy process.</p>
+                        
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="margin-bottom: 0.5rem;">Location</h4>
+                            <p style="color: var(--text-light);">123 Serenity Lane, Suite 400<br>Wellness District, NY 10012</p>
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="margin-bottom: 0.5rem;">Email</h4>
+                            <p style="color: var(--text-light);">contact@healinggarden.com</p>
+                        </div>
+
+                        <div>
+                            <h4 style="margin-bottom: 0.5rem;">Phone</h4>
+                            <p style="color: var(--text-light);">+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-main" style="background-color: #fafafa;">
+                        <h3 class="mb-4">Send a Message</h3>
+                        <form onsubmit="event.preventDefault(); alert('Message sent!');">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" placeholder="Your Email">
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea class="form-control" rows="5" placeholder="How can we help?"></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h2 class="brand-font" style="font-size: 2.5rem;">The Healing Garden</h2>
+            <p style="opacity: 0.8; margin-bottom: 2rem;">Cultivating mental wellness and emotional growth in a safe, supportive environment.</p>
+            <div>
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('about')">About</a>
+                <a href="#" onclick="showPage('services')">Services</a>
+                <a href="#" onclick="showPage('contact')">Contact</a>
+            </div>
+            <p style="margin-top: 3rem; font-size: 0.8rem; opacity: 0.6;">&copy; 2025 The Healing Garden. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Link to JS File -->
+    <script src="script.js"></script>
+</body>
+</html>
